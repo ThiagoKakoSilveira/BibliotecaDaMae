@@ -20,6 +20,14 @@
 
                         <p:panelGrid columns="3">
 
+                            <p:outputLabel for="sexo" value="Sexo:"/>
+                            <p:selectOneRadio id="sexo" requiredMessage="Campo obrigatório" required="true" 
+                                              value="#{pessoaMb.amigo.sexo}">
+                                <f:selectItem itemLabel="Masculino" itemValue="Masculino"/>
+                                <f:selectItem itemLabel="Feminino" itemValue="Feminino"/>
+                            </p:selectOneRadio>
+                            <p:message for="sexo" />
+
                             <p:outputLabel for="nome" value="Nome:"/>
                             <p:inputText id="nome" requiredMessage="Campo obrigatório" required="true" 
                                          value="#{pessoaMb.amigo.nome}" />
@@ -38,7 +46,7 @@
                             <p:message for="email" />
 
                             <p:outputLabel for="login" value="Login de Acesso:"/>
-                            <p:inputText id="endereco" requiredMessage="Campo obrigatório" required="true" 
+                            <p:inputText id="login" requiredMessage="Campo obrigatório" required="true" 
                                          value="#{pessoaMb.amigo.login}" />
                             <p:message for="login" />
 
@@ -60,33 +68,34 @@
 
                         </p:panelGrid>
 
-                        <p:commandButton value="Salvar" process="@form" update="@form tabelaDeClientes" 
-                                         action="" icon="fa fa-fw fa-save" />
+                        <p:commandButton value="Salvar" process="@form" update="@form tabelaDeAmigos" 
+                                         action="#{pessoaMb.salvar()}" icon="fa fa-fw fa-save" />
                         <p:commandButton value="Limpar" process="@this" update="@form" 
-                                         action="" icon="fa fa-fw fa-eraser" />
+                                         action="#{pessoaMb.limpar()}" icon="fa fa-fw fa-eraser" />
                     </h:form>
-                    <p:dataTable id="tabelaDeClientes" var="amigo" value="#{pessoaMb.repositorio.pessoas}"
-                                 emptyMessage="Não existem clientes cadastradas" style="padding-top:20px;">
-                        <!--  	<p:column headerText="Id">
-                                    <h:outputText value="#{amigo.id}" />
-                                    </p:column>-->
+                    <p:dataTable id="tabelaDeAmigos" var="amigo" value="#{pessoaMb.repositorio.pessoas}"
+                                 emptyMessage="Não existem amigos cadastradas" style="padding-top:20px;">
+                        <p:column headerText="Id">
+                            <h:outputText value="#{amigo.id}" />
+                        </p:column>
                         <p:column headerText="Nome" style="text-align: center">
                             <h:outputText value="#{amigo.nome}" />
                         </p:column>
                         <p:column headerText="Telefone" width="150">
                             <h:outputText value="#{amigo.telefone}" />
                         </p:column>
-                        <p:column headerText="Endereço">
-                            <h:outputText value="#{amigo.login}" />
-                        </p:column>
                         <p:column headerText="Email" width="300">
                             <h:outputText value="#{amigo.email}" />
                         </p:column>
+                        <p:column headerText="Sexo" width="150">
+                            <h:outputText value="#{amigo.sexo}" />
+                        </p:column>
                         <p:column headerText="Ações" style="text-align: center">
-                            <p:commandButton icon="fa fa-fw fa-edit" title="Editar Cliente" update="clienteForm" 
-                                             action="#{pessoaMb.setCliente(cliente)}" />
-                            <p:commandButton icon="fa fa-fw fa-trash" title="Deletar Cliente" update="tabelaDeClientes clienteForm" 
-                                             action="#{pessoaMb.deletar(cliente)}">
+                            <h:form id="crudForm">
+                            <p:commandButton icon="fa fa-fw fa-edit" title="Editar Amigo" update="amigoForm" 
+                                             action="#{pessoaMb.setAmigo(amigo)}" />
+                            <p:commandButton icon="fa fa-fw fa-trash" title="Deletar Cliente" update="tabelaDeAmigos amigoForm" 
+                                             action="#{pessoaMb.deletarAmigo(amigo)}">
                                 <p:confirm header="Confirmação" message="Deseja deletar essa Cliente?" icon="ui-icon-alert" />
                             </p:commandButton>
 
@@ -94,6 +103,7 @@
                                 <p:commandButton value="Sim" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
                                 <p:commandButton value="Não" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
                             </p:confirmDialog>
+                            </h:form>
                         </p:column>
                     </p:dataTable>
 

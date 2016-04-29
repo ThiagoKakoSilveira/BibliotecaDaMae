@@ -9,10 +9,10 @@ import javax.faces.bean.SessionScoped;
  *
  * @author Thiago
  */
-
 @ManagedBean
 @SessionScoped
 public class PessoaMb {
+
     private Pessoa amigo;
     private RepositorioPessoa repositorio;
 
@@ -36,9 +36,18 @@ public class PessoaMb {
     public void setRepositorio(RepositorioPessoa repositorio) {
         this.repositorio = repositorio;
     }
+
+    public void deletarAmigo(Pessoa amigo) {
+        repositorio.remover(amigo);
+    }
+
+    public void salvar() {
+        repositorio.addPessoa(getAmigo());
+                
+        limpar();
+    }
     
-    
-    
-    
-    
+    public void limpar() {
+        setAmigo(new Pessoa());
+    }
 }

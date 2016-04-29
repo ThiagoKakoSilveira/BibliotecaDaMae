@@ -7,11 +7,21 @@ import java.util.Objects;
  * @author Thiago
  */
 public class Pessoa {
-    private String nome, telefone, login, senha, email;
-    private int sexo;
+    private String nome, telefone, login, senha, email, sexo;    
+    private Integer id;
     
     public Pessoa(){
         
+    }
+    
+    public Pessoa(Pessoa p){
+        this.id = p.getId();
+        this.nome = p.getNome();
+        this.telefone = p.getTelefone();
+        this.login = p.getLogin();
+        this.email = p.getEmail();
+        this.senha = p.getSenha();
+        this.sexo = p.getSexo();
     }
     
     public String getNome() {
@@ -54,29 +64,37 @@ public class Pessoa {
         this.email = email;
     }
 
-    public int getSexo() {
+    public String getSexo() {
         return sexo;
     }
-    
-    public String getSexoString(){
-        if(sexo==1)return "Masculino";
-        else return "Feminino";
-                
+
+    public void setSexo(String sexo) {
+        this.sexo = sexo;
     }
 
-    public void setSexo(int sexo) {
-        this.sexo = sexo;
+    
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+    
+    public boolean verificaLogin(String login, String senha){
+        return(this.login.equals(login) && this.senha.equals(senha));
     }
 
     @Override
     public int hashCode() {
-        int hash = 7;
+        int hash = 3;
         hash = 53 * hash + Objects.hashCode(this.nome);
         hash = 53 * hash + Objects.hashCode(this.telefone);
         hash = 53 * hash + Objects.hashCode(this.login);
         hash = 53 * hash + Objects.hashCode(this.senha);
         hash = 53 * hash + Objects.hashCode(this.email);
-        hash = 53 * hash + this.sexo;
+        hash = 53 * hash + Objects.hashCode(this.sexo);
+        hash = 53 * hash + Objects.hashCode(this.id);
         return hash;
     }
 
@@ -92,9 +110,6 @@ public class Pessoa {
             return false;
         }
         final Pessoa other = (Pessoa) obj;
-        if (this.sexo != other.sexo) {
-            return false;
-        }
         if (!Objects.equals(this.nome, other.nome)) {
             return false;
         }
@@ -110,14 +125,12 @@ public class Pessoa {
         if (!Objects.equals(this.email, other.email)) {
             return false;
         }
+        if (!Objects.equals(this.sexo, other.sexo)) {
+            return false;
+        }
+        if (!Objects.equals(this.id, other.id)) {
+            return false;
+        }
         return true;
-    }
-    
-    public boolean verificaLogin(String login, String senha){
-        return(this.login.equals(login) && this.senha.equals(senha));
-    }
-    
-    public String toString(){
-        return ("Nome: "+nome+ " Email: "+email+ " Telefone: "+ telefone+ " Login: "+login+ "senha: "+senha);
-    }
+    }    
 }
