@@ -1,17 +1,78 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
-  "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-    xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-    xmlns:f="http://java.sun.com/jsf/core"
-    xmlns:h="http://xmlns.jcp.org/jsf/html">
-<h:head></h:head>
-<h:body>
-    <ui:composition template="/WEB-INF/modelos/padrao.xhtml">
-        <ui:define name="content">
- 
-            
- 
-        </ui:define>
-    </ui:composition>
-</h:body>
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">   
+    <h:body>
+        <ui:composition template="/WEB-INF/modelos/padrao.xhtml">
+            <ui:define name="conteudo">
+                <p:layout>
+                    <p:layoutUnit position="north" style="text-align: center;">
+                        <p:outputLabel style="font-size: 30px;" value="Manutenção de Livros"/>
+                    </p:layoutUnit>
+
+                    <p:layoutUnit position="center">
+
+                        <h:form id="livroForm">				
+                            <p:growl id="growl" showDetail="true" sticky="false" life="4000" />  
+
+                            <p:panelGrid columns="3">
+
+                                <p:outputLabel for="titulo" value="Título:"/>
+                                <p:inputText id="titulo" requiredMessage="Campo obrigatório" required="true" 
+                                             value="#{livroMb.livro.nome}" />
+                                <p:message for="titulo" />
+
+                                <p:outputLabel for="autor" value="Autor:"/>
+                                <p:inputText id="autor" requiredMessage="Campo obrigatório" required="true" 
+                                             value="#{livroMb.livro.autor}" />
+                                <p:message for="autor" />
+                                
+                                <p:outputLabel for="isbn" value="ISBN:"/>
+                                <p:inputText id="isbn" requiredMessage="Campo obrigatório" required="true" 
+                                             value="#{livroMb.livro.autor}" />
+                                <p:message for="isbn" />
+                            </p:panelGrid>
+
+                            <p:commandButton value="Salvar" process="@form" update="@form tabelaDeLivros" action="#{livroMb.salvar()}" icon="fa fa-fw fa-save" />
+                            <p:commandButton value="Limpar" process="@this" update="@form" action="#{livroMb.limpar()}" icon="fa fa-fw fa-eraser" />
+                        </h:form>
+                        <p:dataTable id="tabelaDeLivros" var="livro" value="#{livroManagedBean.listaDeLivrosCadastrados}"
+                                     emptyMessage="Não existem livros cadastrados" style="padding-top:20px;">
+                            <p:column headerText="ISBN">
+                                <h:outputText value="#{livro.isbn}" />
+                            </p:column>
+                            <p:column headerText="Nome">
+                                <h:outputText value="#{livro.nome}" />
+                            </p:column>
+                            <p:column headerText="Autor">
+                                <h:outputText value="#{livro.autor}" />
+                            </p:column>
+                            <p:column headerText="Páginas">
+                                <h:outputText value="#{livro.paginas}" />
+                            </p:column>
+                            <p:column headerText="Quantidade em estoque">
+                                <h:outputText value="#{livro.quantidadeEstoque}" />
+                            </p:column>
+                            <p:column headerText="Ações" style="text-align: center">
+                                <p:commandButton icon="fa fa-fw fa-edit" title="Editar Livro" update="livroForm" action="#{livroManagedBean.setLivro(livro)}" />
+                                <p:commandButton icon="fa fa-fw fa-trash" title="Deletar Livro" update="tabelaDeLivros livroForm" action="#{livroManagedBean.deletar(livro)}">
+                                    <p:confirm header="Confirmação" message="Deseja deletar o Livro?" icon="ui-icon-alert" />
+                                </p:commandButton>
+
+                                <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+                                    <p:commandButton value="Sim" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+                                    <p:commandButton value="Não" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+                                </p:confirmDialog>
+                            </p:column>
+                        </p:dataTable>
+
+                    </p:layoutUnit>
+
+                </p:layout>
+            </ui:define>
+        </ui:composition>
+    </h:body>
 </html>

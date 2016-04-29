@@ -3,9 +3,11 @@
     <editor-bookmarks xmlns="http://www.netbeans.org/ns/editor-bookmarks/2" lastBookmarkId="0"/>
     <open-files xmlns="http://www.netbeans.org/ns/projectui-open-files/2">
         <group>
-            <file>file:/C:/Users/Thiago/Documents/NetBeansProjects/BibliotecaDaMaeJSF/web/paginas/admin/livro.xhtml</file>
-            <file>file:/C:/Users/Thiago/Documents/NetBeansProjects/BibliotecaDaMaeJSF/src/java/managedBeans/LoginMb.java</file>
             <file>file:/C:/Users/Thiago/Documents/NetBeansProjects/BibliotecaDaMaeJSF/src/java/managedBeans/PessoaMb.java</file>
+            <file>file:/C:/Users/Thiago/Documents/NetBeansProjects/BibliotecaDaMaeJSF/src/java/repositorios/RepositorioLivro.java</file>
+            <file>file:/C:/Users/Thiago/Documents/NetBeansProjects/BibliotecaDaMaeJSF/src/java/modelos/Livro.java</file>
+            <file>file:/C:/Users/Thiago/Documents/NetBeansProjects/BibliotecaDaMaeJSF/src/java/repositorios/RepositorioPessoa.java</file>
+            <file>file:/C:/Users/Thiago/Documents/NetBeansProjects/BibliotecaDaMaeJSF/src/java/managedBeans/LivroMb.java</file>
         </group>
     </open-files>
 </project-private>
