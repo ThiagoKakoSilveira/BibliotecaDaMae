@@ -1,7 +1,7 @@
 package managedBeans;
 
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
+import javax.faces.bean.ViewScoped;
 import modelos.Livro;
 import repositorios.RepositorioLivro;
 
@@ -10,7 +10,7 @@ import repositorios.RepositorioLivro;
  * @author Thiago
  */
 @ManagedBean
-@SessionScoped
+@ViewScoped
 public class LivroMb {
 
     private Livro livro;

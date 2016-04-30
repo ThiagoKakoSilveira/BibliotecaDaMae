@@ -3,14 +3,14 @@ package managedBeans;
 import modelos.Pessoa;
 import repositorios.RepositorioPessoa;
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.SessionScoped;
+import javax.faces.bean.ViewScoped;
 
 /**
  *
  * @author Thiago
  */
 @ManagedBean
-@SessionScoped
+@ViewScoped
 public class PessoaMb {
 
     private Pessoa amigo;

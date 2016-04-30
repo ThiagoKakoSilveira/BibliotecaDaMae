@@ -54,7 +54,7 @@
                                              action="#{livroMb.limpar()}" icon="fa fa-fw fa-eraser" />
                         </h:form>
                         <p:dataTable id="tabelaDeLivros" var="livro" 
-                                     value="#{livroMb.repositorio.livros}"
+                                     value="#{livroMb.repositorio.repositorio}"
                                      emptyMessage="Não existem livros cadastrados" style="padding-top:20px;">
                             <p:column headerText="Id">
                                 <h:outputText value="#{livro.id}" />

@@ -14,9 +14,7 @@ import repositorios.RepositorioPessoa;
 public class UsuarioMb {
     
     private RepositorioPessoa repositorio;
-    private Pessoa amigoSelecionado;
-    private final String nomeMae = "Clelia";
-    private final String senhaMae = "Rickson15";
+    private Pessoa amigoSelecionado;   
 
     public UsuarioMb() {
         repositorio = new RepositorioPessoa();

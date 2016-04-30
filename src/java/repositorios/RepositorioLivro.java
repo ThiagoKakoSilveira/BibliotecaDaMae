@@ -10,46 +10,54 @@ import util.Mensageiro;
  * @author Thiago
  */
 public class RepositorioLivro {
-    List<Livro> livros;
+
+    List<Livro> repositorio;
 
     public RepositorioLivro() {
-        livros = new ArrayList<>();
+        repositorio = new ArrayList<>();
     }
 
-    public List<Livro> getLivros() {
-        return livros;
+    public List<Livro> getRepositorio() {
+        return repositorio;
     }
 
-    public void setLivros(List<Livro> livros) {
-        this.livros = livros;
+    public void setRepositorio(List<Livro> repositorio) {
+        this.repositorio = repositorio;
     }
-    
-    public void addLivro(Livro livro){
-        if(livro.getId() == null){
-            if(livros.isEmpty()){
+
+    public void addLivro(Livro livro) {
+        if (livro.getId() == null) {
+            if (repositorio.isEmpty()) {
                 livro.setId(1);
-                livros.add(livro);
-                Mensageiro.notificaInformacao("Parabéns", "Livro cadastrado com sucesso!");                
+                notificaECadastra(livro);
+            } else {
+                livro.setId(repositorio.size() + 1);                
+                notificaECadastra(livro);
             }
-        }else{
+        } else {
             atualizaLivro(livro);
             Mensageiro.notificaInformacao("Parabéns", "Livro editado com sucesso!");
         }
     }
 
+    private void notificaECadastra(Livro livro) {
+        repositorio.add(livro);
+        Mensageiro.notificaInformacao("Parabéns", "Livro cadastrado com sucesso!");
+    }
+
     public void atualizaLivro(Livro livro) {
-        for (Livro l : livros) {
-            if(l==livro){
+        for (Livro l : repositorio) {
+            if (l == livro) {
                 l = new Livro(livro);
             }
         }
     }
-    
-    public void remover(Livro livro){
-        for (Livro l : livros) {
-            if(l == livro){
-                livros.remove(l);
+
+    public void remover(Livro livro) {
+        for (Livro l : repositorio) {
+            if (l == livro) {
+                repositorio.remove(l);
             }
-        }        
+        }
     }
 }
