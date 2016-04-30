@@ -31,9 +31,8 @@
                                 <p:message for="autor" />
 
                                 <p:outputLabel for="aquisicao" value="Data de Aquisição:" />
-                                <p:calendar id="aquisicao" navigator="true" value="#{livroMb.livro.aquisicao}" 
-                                            pattern="dd-MM-yyyy"  
-                                            mask="true" requiredMessage="Campo obrigatório" required="true"/>
+                                <p:calendar locale="de" id="aquisicao" navigator="true" value="#{livroMb.livro.aquisicao}" 
+                                             requiredMessage="Campo obrigatório"/>
                                 <p:message for="aquisicao"/>
 
                                 <p:outputLabel for="sinopse" value="Sinopse:"/>
