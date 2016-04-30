@@ -43,10 +43,9 @@ public class PessoaMb {
 
     public void salvar() {
         repositorio.addPessoa(getAmigo());
-                
         limpar();
     }
-    
+
     public void limpar() {
         setAmigo(new Pessoa());
     }

@@ -1,5 +1,6 @@
 package modelos;
 
+import java.util.Date;
 import java.util.Objects;
 
 /**
@@ -7,16 +8,29 @@ import java.util.Objects;
  * @author Thiago
  */
 public class Livro {
-    private String titulo,autor, isbn;
+    private String titulo,autor, sinopse;
+    private boolean emprestado;
+    private Date aquisicao;
+    private Integer id;
     
     public Livro(){
         
     }
     
-    public Livro(String titulo, String autor, String isbn){
+    public Livro(String titulo, String autor, boolean emprestimo, String sinopse, Date aquisicao){
         this.autor = autor;
-        this.isbn = isbn;
-        this.titulo = titulo;        
+        this.emprestado = emprestimo;
+        this.titulo = titulo;  
+        this.sinopse = sinopse;
+    }
+
+    public Livro(Livro livro) {
+        this.autor = livro.getAutor();
+        this.emprestado = livro.isEmprestado();
+        this.titulo = livro.getTitulo();  
+        this.sinopse = livro.getSinopse();        
+        this.id = livro.getId();
+        this.aquisicao = livro.aquisicao;
     }
 
     public String getTitulo() {
@@ -35,20 +49,47 @@ public class Livro {
         this.autor = autor;
     }
 
-    public String getIsbn() {
-        return isbn;
+    public String getSinopse() {
+        return sinopse;
     }
 
-    public void setIsbn(String isbn) {
-        this.isbn = isbn;
+    public void setSinopse(String sinopse) {
+        this.sinopse = sinopse;
     }
 
+    public boolean isEmprestado() {
+        return emprestado;
+    }
+
+    public void setEmprestado(boolean emprestado) {
+        this.emprestado = emprestado;
+    }
+
+    public Date getAquisicao() {
+        return aquisicao;
+    }
+
+    public void setAquisicao(Date dataDeAquisição) {
+        this.aquisicao = dataDeAquisição;
+    }
+
+    public Integer getId() {
+        return id;
+    }
+
+    public void setId(Integer id) {
+        this.id = id;
+    }
+    
     @Override
     public int hashCode() {
         int hash = 7;
-        hash = 37 * hash + Objects.hashCode(this.titulo);
-        hash = 37 * hash + Objects.hashCode(this.autor);
-        hash = 37 * hash + Objects.hashCode(this.isbn);
+        hash = 13 * hash + Objects.hashCode(this.titulo);
+        hash = 13 * hash + Objects.hashCode(this.autor);
+        hash = 13 * hash + Objects.hashCode(this.sinopse);
+        hash = 13 * hash + (this.emprestado ? 1 : 0);
+        hash = 13 * hash + Objects.hashCode(this.aquisicao);
+        hash = 13 * hash + this.id;
         return hash;
     }
 
@@ -64,17 +105,24 @@ public class Livro {
             return false;
         }
         final Livro other = (Livro) obj;
+        if (this.emprestado != other.emprestado) {
+            return false;
+        }
+        if (!Objects.equals(this.id, other.id)) {
+            return false;
+        }
         if (!Objects.equals(this.titulo, other.titulo)) {
             return false;
         }
         if (!Objects.equals(this.autor, other.autor)) {
             return false;
         }
-        if (!Objects.equals(this.isbn, other.isbn)) {
+        if (!Objects.equals(this.sinopse, other.sinopse)) {
+            return false;
+        }
+        if (!Objects.equals(this.aquisicao, other.aquisicao)) {
             return false;
         }
         return true;
     }
-    
-    
 }

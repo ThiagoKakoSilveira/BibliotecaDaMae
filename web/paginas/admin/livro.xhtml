@@ -22,50 +22,67 @@
 
                                 <p:outputLabel for="titulo" value="Título:"/>
                                 <p:inputText id="titulo" requiredMessage="Campo obrigatório" required="true" 
-                                             value="#{livroMb.livro.nome}" />
+                                             value="#{livroMb.livro.titulo}" />
                                 <p:message for="titulo" />
 
                                 <p:outputLabel for="autor" value="Autor:"/>
                                 <p:inputText id="autor" requiredMessage="Campo obrigatório" required="true" 
                                              value="#{livroMb.livro.autor}" />
                                 <p:message for="autor" />
-                                
-                                <p:outputLabel for="isbn" value="ISBN:"/>
-                                <p:inputText id="isbn" requiredMessage="Campo obrigatório" required="true" 
-                                             value="#{livroMb.livro.autor}" />
-                                <p:message for="isbn" />
+
+                                <p:outputLabel for="aquisicao" value="Data de Aquisição:" />
+                                <p:calendar id="aquisicao" navigator="true" value="#{livroMb.livro.aquisicao}" 
+                                            pattern="dd-MM-yyyy"  
+                                            mask="true" requiredMessage="Campo obrigatório" required="true"/>
+                                <p:message for="aquisicao"/>
+
+                                <p:outputLabel for="sinopse" value="Sinopse:"/>
+                                <p:inputTextarea id="sinopse" rows="6" cols="22" 
+                                                 requiredMessage="Campo obrigatório" 
+                                                 required="true" value="#{livroMb.livro.sinopse}" />
+                                <p:message for="sinopse" />
+
+                                <p:outputLabel for="emprestado" value="Está emprestado? "/>                                
+                                <p:selectBooleanCheckbox id="emprestado" value="#{livroMb.livro.emprestado}"/>
+                                <p:outputLabel for="emprestado" value="Obs: Só marcar se não estiver em casa!!!" 
+                                               style="color: red"/>
                             </p:panelGrid>
 
-                            <p:commandButton value="Salvar" process="@form" update="@form tabelaDeLivros" action="#{livroMb.salvar()}" icon="fa fa-fw fa-save" />
-                            <p:commandButton value="Limpar" process="@this" update="@form" action="#{livroMb.limpar()}" icon="fa fa-fw fa-eraser" />
+                            <p:commandButton value="Salvar" process="@form" update="@form tabelaDeLivros"
+                                             action="#{livroMb.salvar()}" icon="fa fa-fw fa-save" />
+                            <p:commandButton value="Limpar" process="@this" update="@form" 
+                                             action="#{livroMb.limpar()}" icon="fa fa-fw fa-eraser" />
                         </h:form>
-                        <p:dataTable id="tabelaDeLivros" var="livro" value="#{livroManagedBean.listaDeLivrosCadastrados}"
+                        <p:dataTable id="tabelaDeLivros" var="livro" 
+                                     value="#{livroMb.repositorio.livros}"
                                      emptyMessage="Não existem livros cadastrados" style="padding-top:20px;">
-                            <p:column headerText="ISBN">
-                                <h:outputText value="#{livro.isbn}" />
+                            <p:column headerText="Id">
+                                <h:outputText value="#{livro.id}" />
                             </p:column>
-                            <p:column headerText="Nome">
-                                <h:outputText value="#{livro.nome}" />
+                            <p:column headerText="Título">
+                                <h:outputText value="#{livro.titulo}" />
                             </p:column>
                             <p:column headerText="Autor">
                                 <h:outputText value="#{livro.autor}" />
                             </p:column>
-                            <p:column headerText="Páginas">
-                                <h:outputText value="#{livro.paginas}" />
+                            <p:column headerText="Aquisição">
+                                <h:outputText value="#{livro.aquisicao}" />
                             </p:column>
-                            <p:column headerText="Quantidade em estoque">
-                                <h:outputText value="#{livro.quantidadeEstoque}" />
+                            <p:column headerText="Está emprestado?">
+                                <h:outputText value="#{livro.emprestado}" />
                             </p:column>
                             <p:column headerText="Ações" style="text-align: center">
-                                <p:commandButton icon="fa fa-fw fa-edit" title="Editar Livro" update="livroForm" action="#{livroManagedBean.setLivro(livro)}" />
-                                <p:commandButton icon="fa fa-fw fa-trash" title="Deletar Livro" update="tabelaDeLivros livroForm" action="#{livroManagedBean.deletar(livro)}">
-                                    <p:confirm header="Confirmação" message="Deseja deletar o Livro?" icon="ui-icon-alert" />
-                                </p:commandButton>
+                                <h:form>
+                                    <p:commandButton icon="fa fa-fw fa-edit" title="Editar Livro" update="livroForm" action="#{livroMb.setLivro(livro)}" />
+                                    <p:commandButton icon="fa fa-fw fa-trash" title="Deletar Livro" update="tabelaDeLivros livroForm" action="#{livroMb.deletar(livro)}">
+                                        <p:confirm header="Confirmação" message="Deseja deletar o Livro?" icon="ui-icon-alert" />
+                                    </p:commandButton>
 
-                                <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
-                                    <p:commandButton value="Sim" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
-                                    <p:commandButton value="Não" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
-                                </p:confirmDialog>
+                                    <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+                                        <p:commandButton value="Sim" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+                                        <p:commandButton value="Não" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+                                    </p:confirmDialog>
+                                </h:form>
                             </p:column>
                         </p:dataTable>
 

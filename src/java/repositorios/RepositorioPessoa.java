@@ -26,6 +26,7 @@ public class RepositorioPessoa {
     
     public void addPessoa(Pessoa pessoa){
         if(pessoa.getId()== null){
+//            if()
             pessoa.setId(pessoas.size()+1);
             pessoas.add(pessoa); 
             Mensageiro.notificaInformacao("Parabéns", "Cliente cadastrado com sucesso!");
