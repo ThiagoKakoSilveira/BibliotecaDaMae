@@ -3,13 +3,13 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:p="http://primefaces.org/ui"
-	xmlns:f="http://java.sun.com/jsf/core" id="modalLivroId"
+	xmlns:f="http://java.sun.com/jsf/core" id="modalLivroId" appendToBody="true"
 	widgetVar="dialogLivro" modal="false" resizable="false" header="Selecione os livros" closable="true">
 
 	<div style="height: 200px; width: 550px; overflow: auto;">
             <p:dataTable selection="#{emprestimoMb.emprestimo.livro}"
 			rowKey="#{livro.id}" id="tabelaModalDeLivros" var="livro"
-                        value="#{livroMb.livro}"
+                        value="#{livroMb.repositorio.repositorio}"
 			emptyMessage="Não existem livros cadastrados"
 			style="padding-top:20px;">
 

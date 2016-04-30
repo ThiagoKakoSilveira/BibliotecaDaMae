@@ -1,7 +1,7 @@
 package managedBeans;
 
 import javax.faces.bean.ManagedBean;
-import javax.faces.bean.ViewScoped;
+import javax.faces.bean.SessionScoped;
 import modelos.Emprestimo;
 import repositorios.RepositorioEmprestimo;
 
@@ -10,7 +10,7 @@ import repositorios.RepositorioEmprestimo;
  * @author Thiago
  */
 @ManagedBean
-@ViewScoped
+@SessionScoped
 public class EmprestimoMb {
     private Emprestimo emprestimo;
     private RepositorioEmprestimo listaDeEmprestimo;
@@ -45,7 +45,10 @@ public class EmprestimoMb {
     }
     
     public void limpar(){
-        setEmprestimo(new Emprestimo());
+        setEmprestimo(new Emprestimo());        
+    }
+    
+    public void devolver(Emprestimo emprestimo){
         
     }
 }

@@ -35,7 +35,7 @@
                             <p:commandButton value="Selecionar Livros"
                                              id="btnModalLivro" oncomplete="PF('dialogLivro').show();" />
                             <ui:repeat id="listaLivros" var="livro"
-                                       value="#{emprestimoMb.emprestimo.livros}">
+                                       value="#{emprestimoMb.emprestimo.livro}">
                                 <p:outputLabel value="#{livro.nome}" />
                                 <br></br>
                             </ui:repeat>
@@ -48,42 +48,32 @@
                         <p:commandButton value="Limpar" process="@this" update="@form" action="#{emprestimoMb.limpar}" 
                                          icon="fa fa-fw fa-eraser" />
                     </h:form>
-                    <p:dataTable id="tabelaDeEmprestimo" var="emprestado" value="#{emprestimoMb.listaDeEmprestimo}"
+                    <p:dataTable id="tabelaDeEmprestimo" var="emprestado" value="#{emprestimoMb.listaDeEmprestimo.repositorio}"
                                  emptyMessage="Não existem empréstimos cadastrados" style="padding-top:20px;">
                         <p:column headerText="Id" width="20">
                             <h:outputText value="#{emprestado.id}" />
                         </p:column>
-                        <p:column headerText="Nome do locador">
-                            <h:outputText value="#{emprestado.amigo}" />
+                        <p:column headerText="Emprestado para">
+                            <h:outputText value="#{emprestado.amigo.nome}" />
                         </p:column>
                         <p:column headerText="Título do Livro">
-                            <ui:repeat id="listaLivros" var="livro"
-                                       value="#{emprestado.livros}" >
-                                <p:outputLabel value="#{livro.nome}" />
-                                <br></br>
-                            </ui:repeat>
+                            <h:outputText value="#{emprestado.livro.titulo}"/>
                         </p:column>	
-                        <p:column headerText="Funcionário">
-                            <h:outputText value="#{emprestado.funcionario.nome}" />
-                        </p:column>		
                         <p:column headerText="Data do emprétimo">
                             <h:outputText value="#{emprestado.dataEmprestimo}" />
                         </p:column>	
                         <p:column headerText="Data de Devolução">
                             <h:outputText value="#{emprestado.dataDevolucao}" />
                         </p:column>	
-                        <p:column headerText="Dias de Atraso">
-                            <h:outputText value="#{emprestado.diasAtrasados}" />
-                        </p:column>		
                         <p:column headerText="Status" width="30">
-                            <h:outputText value="#{emprestado.status}" />
+                            <h:outputText value="#{emprestado.emprestimoAtivo}" />
                         </p:column>			    
                         <p:column headerText="Ações" style="text-align: center">
                             <p:commandButton icon="fa fa-fw fa-edit" title="Editar Empréstimo" update="emprestimoForm">					    		
-                                <f:setPropertyActionListener value="#{emprestado}" target="#{emprestimoManagedBean.emprestimo}" />					    		
+                                <f:setPropertyActionListener value="#{emprestado}" target="#{emprestimoMb.emprestimo}" />					    		
                             </p:commandButton>	
                             <p:commandButton icon="fa fa-fw fa-trash" title="Devolver Empréstimo" 
-                                             update="tabelaDeEmprestimo emprestimoForm" action="#{emprestimoManagedBean.devolver(emprestado)}">
+                                             update="tabelaDeEmprestimo emprestimoForm" action="#{emprestimoMb.devolver(emprestado)}">
                                 <p:confirm header="Confirmação" message="Deseja deletar o Empréstimo?" icon="ui-icon-alert" />
                             </p:commandButton>
 
