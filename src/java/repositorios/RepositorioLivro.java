@@ -27,13 +27,8 @@ public class RepositorioLivro {
 
     public void addLivro(Livro livro) {
         if (livro.getId() == null) {
-            if (repositorio.isEmpty()) {
-                livro.setId(1);
-                notificaECadastra(livro);
-            } else {
-                livro.setId(repositorio.size() + 1);                
-                notificaECadastra(livro);
-            }
+            livro.setId(repositorio.size()+1);
+            notificaECadastra(livro);
         } else {
             atualizaLivro(livro);
             Mensageiro.notificaInformacao("Parabéns", "Livro editado com sucesso!");

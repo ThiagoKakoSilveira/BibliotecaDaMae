@@ -34,16 +34,11 @@
                         <p:panel>																		
                             <p:commandButton value="Selecionar Livros"
                                              id="btnModalLivro" oncomplete="PF('dialogLivro').show();" />
-                            <ui:repeat id="listaLivros" var="livro"
-                                       value="#{emprestimoMb.emprestimo.livro}">
-                                <p:outputLabel value="#{livro.nome}" />
-                                <br></br>
-                            </ui:repeat>
-
+                            <p:outputLabel value="#{emprestimoMb.emprestimo.livro.titulo}" />
                         </p:panel>		
                         <ui:include src="selecao_de_livros.xhtml" />
 
-                        <p:commandButton value="Salvar" process="@form listaLivros"  update="@form tabelaDeEmprestimo" 
+                        <p:commandButton value="Salvar" process="@form"  update="@form tabelaDeEmprestimo" 
                                          action="#{emprestimoMb.salvar}" icon="fa fa-fw fa-save" />
                         <p:commandButton value="Limpar" process="@this" update="@form" action="#{emprestimoMb.limpar}" 
                                          icon="fa fa-fw fa-eraser" />
@@ -69,18 +64,20 @@
                             <h:outputText value="#{emprestado.emprestimoAtivo}" />
                         </p:column>			    
                         <p:column headerText="Ações" style="text-align: center">
-                            <p:commandButton icon="fa fa-fw fa-edit" title="Editar Empréstimo" update="emprestimoForm">					    		
-                                <f:setPropertyActionListener value="#{emprestado}" target="#{emprestimoMb.emprestimo}" />					    		
-                            </p:commandButton>	
-                            <p:commandButton icon="fa fa-fw fa-trash" title="Devolver Empréstimo" 
-                                             update="tabelaDeEmprestimo emprestimoForm" action="#{emprestimoMb.devolver(emprestado)}">
-                                <p:confirm header="Confirmação" message="Deseja deletar o Empréstimo?" icon="ui-icon-alert" />
-                            </p:commandButton>
+                            <h:form>
+                                <p:commandButton icon="fa fa-fw fa-edit" title="Editar Empréstimo" update="emprestimoForm">					    		
+                                    <f:setPropertyActionListener value="#{emprestado}" target="#{emprestimoMb.emprestimo}" />					    		
+                                </p:commandButton>	
+                                <p:commandButton icon="fa fa-fw fa-trash" title="Devolver Empréstimo" 
+                                                 update="tabelaDeEmprestimo emprestimoForm" action="#{emprestimoMb.devolver(emprestado)}">
+                                    <p:confirm header="Confirmação" message="Deseja deletar o Empréstimo?" icon="ui-icon-alert" />
+                                </p:commandButton>
 
-                            <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
-                                <p:commandButton value="Sim" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
-                                <p:commandButton value="Não" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
-                            </p:confirmDialog>
+                                <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
+                                    <p:commandButton value="Sim" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+                                    <p:commandButton value="Não" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+                                </p:confirmDialog>
+                            </h:form>    
                         </p:column>
                     </p:dataTable>
                 </p:layoutUnit>

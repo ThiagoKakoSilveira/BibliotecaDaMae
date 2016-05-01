@@ -37,11 +37,12 @@ public class EmprestimoMb {
     }
     
     public void salvar(){
-        
+        listaDeEmprestimo.addEmprestimo(getEmprestimo());
+        limpar();
     }
     
     public void deletar(){
-        
+        listaDeEmprestimo.remover(getEmprestimo());
     }
     
     public void limpar(){

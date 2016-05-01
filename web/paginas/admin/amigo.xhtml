@@ -75,7 +75,7 @@
                     </h:form>
                     <p:dataTable id="tabelaDeAmigos" var="amigo" value="#{pessoaMb.repositorio.pessoas}"
                                  emptyMessage="Não existem amigos cadastradas" style="padding-top:20px;">
-                        <p:column headerText="Id">
+                        <p:column headerText="Id" width="50">
                             <h:outputText value="#{amigo.id}" />
                         </p:column>
                         <p:column headerText="Nome" style="text-align: center">

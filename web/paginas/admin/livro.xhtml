@@ -44,7 +44,7 @@
                                 <p:outputLabel for="emprestado" value="Está emprestado? "/>                                
                                 <p:selectBooleanCheckbox id="emprestado" value="#{livroMb.livro.emprestado}"/>
                                 <p:outputLabel for="emprestado" value="Obs: Só marcar se não estiver em casa!!!" 
-                                               style="color: red"/>
+                                               style="color: gray"/>
                             </p:panelGrid>
 
                             <p:commandButton value="Salvar" process="@form" update="@form tabelaDeLivros"

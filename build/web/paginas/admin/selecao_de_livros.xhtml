@@ -3,7 +3,7 @@
 	xmlns:ui="http://java.sun.com/jsf/facelets"
 	xmlns:h="http://java.sun.com/jsf/html"
 	xmlns:p="http://primefaces.org/ui"
-	xmlns:f="http://java.sun.com/jsf/core" id="modalLivroId" appendToBody="true"
+	xmlns:f="http://java.sun.com/jsf/core" id="modalLivroId" 
 	widgetVar="dialogLivro" modal="false" resizable="false" header="Selecione os livros" closable="true">
 
 	<div style="height: 200px; width: 550px; overflow: auto;">
@@ -20,17 +20,17 @@
 			<p:column headerText="Id">
 				<h:outputText value="#{livro.id}" />
 			</p:column>
-			<p:column headerText="Nome">
-				<h:outputText value="#{livro.nome}" />
+			<p:column headerText="Título">
+                            <h:outputText value="#{livro.titulo}" />
 			</p:column>
 			<p:column headerText="Autor">
 				<h:outputText value="#{livro.autor}" />
 			</p:column>
-			<p:column headerText="Páginas">
-				<h:outputText value="#{livro.paginas}" />
+			<p:column headerText="Está emprestada?">
+                            <h:outputText value="#{livro.emprestado}" />
 			</p:column>
-			<p:column headerText="Quantidade em estoque">
-				<h:outputText value="#{livro.quantidadeEstoque}" />
+			<p:column headerText="Aquisição">
+                            <h:outputText value="#{livro.aquisicao}" />
 			</p:column>
 
 			<f:facet name="footer">

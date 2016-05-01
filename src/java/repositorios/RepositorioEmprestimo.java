@@ -27,13 +27,8 @@ public class RepositorioEmprestimo {
 
     public void addEmprestimo(Emprestimo emprestimo) {
         if (emprestimo.getId() == null) {
-            if (repositorio.isEmpty()) {
-                emprestimo.setId(1);
-                notificaECadastra(emprestimo);
-            }else{
-                emprestimo.setId(repositorio.size()+1);
-                notificaECadastra(emprestimo);
-            }
+            emprestimo.setId(repositorio.size()+1);
+            notificaECadastra(emprestimo);
         } else {
             atualiza(emprestimo);
             Mensageiro.notificaInformacao("Parabéns", "Empréstimo editado com sucesso!");
@@ -47,17 +42,21 @@ public class RepositorioEmprestimo {
 
     public void atualiza(Emprestimo emprestimo) {
         for (Emprestimo e : repositorio) {
-            if(e==emprestimo){
+            if (e == emprestimo) {
                 e = emprestimo;
-            }else Mensageiro.nootificaErro("Erro na atualização", "Não existe esse empréstimo");
+            } else {
+                Mensageiro.nootificaErro("Erro na atualização", "Não existe esse empréstimo");
+            }
         }
     }
-    
-    public void remover(Emprestimo emprestimo){
+
+    public void remover(Emprestimo emprestimo) {
         for (Emprestimo e : repositorio) {
-            if(e == emprestimo){
+            if (e == emprestimo) {
                 repositorio.remove(e);
-            }else Mensageiro.nootificaErro("Erro na exclusão", "Não existe esse empréstimo");
+            } else {
+                Mensageiro.nootificaErro("Erro na exclusão", "Não existe esse empréstimo");
+            }
         }
     }
 }
