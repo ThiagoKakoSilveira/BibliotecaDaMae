@@ -2,6 +2,7 @@ package modelos;
 
 import java.util.Date;
 import java.util.Objects;
+import util.DateUtil;
 
 /**
  *
@@ -18,7 +19,8 @@ public class Emprestimo {
     public Emprestimo() {
     }
 
-    public Emprestimo(Integer id, Livro livro, Pessoa amigo, Date dataEmprestimo, Date dataDevolucao, boolean emprestimoAtivo) {
+    public Emprestimo(Integer id, Livro livro, Pessoa amigo, Date dataEmprestimo, 
+            Date dataDevolucao, boolean emprestimoAtivo) {
         this.id = id;
         this.livro = livro;
         this.amigo = amigo;
@@ -70,9 +72,22 @@ public class Emprestimo {
     public boolean isEmprestimoAtivo() {
         return emprestimoAtivo;
     }
+    
+    public String getEmprestimoAtivoString(){
+        if(emprestimoAtivo)return "Ativo";
+        else return "Devolvido";
+    }
 
     public void setEmprestimoAtivo(boolean emprestimoAtivo) {
         this.emprestimoAtivo = emprestimoAtivo;
+    }
+    
+    public String getDataEmprestimoString(){
+        return DateUtil.dateToString(getDataEmprestimo());
+    }
+    
+    public String getDataDevolucaoString(){
+        return DateUtil.dateToString(dataDevolucao);
     }
 
     @Override

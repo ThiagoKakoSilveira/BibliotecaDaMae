@@ -1,6 +1,7 @@
 package repositorios;
 
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import modelos.Emprestimo;
 import util.Mensageiro;
@@ -27,7 +28,8 @@ public class RepositorioEmprestimo {
 
     public void addEmprestimo(Emprestimo emprestimo) {
         if (emprestimo.getId() == null) {
-            emprestimo.setId(repositorio.size()+1);
+            emprestimo.setId(repositorio.size() + 1);
+            emprestimo.setEmprestimoAtivo(true);
             notificaECadastra(emprestimo);
         } else {
             atualiza(emprestimo);
@@ -56,6 +58,21 @@ public class RepositorioEmprestimo {
                 repositorio.remove(e);
             } else {
                 Mensageiro.nootificaErro("Erro na exclusão", "Não existe esse empréstimo");
+            }
+        }
+    }
+
+    public void devolver(Emprestimo emprestimo) {
+        if (emprestimo.isEmprestimoAtivo()) {
+            emprestimo.setDataDevolucao(new Date());
+            emprestimo.setEmprestimoAtivo(false);
+            for (Emprestimo e : repositorio) {
+                if (e == emprestimo) {
+                    e = emprestimo;
+                    Mensageiro.notificaInformacao("Parabéns", "Empréstimo devolvido com sucesso!");
+                } else {
+                    Mensageiro.nootificaErro("Erro na devolução", "Não existe esse emprétimo");
+                }
             }
         }
     }

@@ -1,5 +1,6 @@
 package managedBeans;
 
+import java.util.Date;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.SessionScoped;
 import modelos.Emprestimo;
@@ -50,6 +51,7 @@ public class EmprestimoMb {
     }
     
     public void devolver(Emprestimo emprestimo){
-        
+        listaDeEmprestimo.devolver(emprestimo);
+        limpar();
     }
 }

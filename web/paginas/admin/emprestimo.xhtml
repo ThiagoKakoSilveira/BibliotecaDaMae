@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" 
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
@@ -27,7 +28,13 @@
                                 <f:selectItems value="#{pessoaMb.repositorio.pessoas}" var="amigo" 
                                                itemLabel="#{amigo.nome}" itemValue="#{amigo}" />
                             </p:selectOneMenu>
-                            <p:message for="amigoSelect" />						
+                            <p:message for="amigoSelect" />
+
+                            <p:outputLabel for="dataEmprestimo" value="Data de Empréstimo:" />
+                            <p:calendar locale="de" id="dataEmprestimo" navigator="true" 
+                                        value="#{emprestimoMb.emprestimo.dataEmprestimo}" 
+                                        requiredMessage="Campo obrigatório"/>
+                            <p:message for="dataEmprestimo"/>
                         </p:panelGrid>
 
                         <p:outputLabel for="btnModalLivro" value="Titulo dos livros" />	
@@ -40,42 +47,48 @@
 
                         <p:commandButton value="Salvar" process="@form"  update="@form tabelaDeEmprestimo" 
                                          action="#{emprestimoMb.salvar}" icon="fa fa-fw fa-save" />
-                        <p:commandButton value="Limpar" process="@this" update="@form" action="#{emprestimoMb.limpar}" 
-                                         icon="fa fa-fw fa-eraser" />
+                        <p:commandButton value="Limpar" process="@this" update="@form" 
+                                         action="#{emprestimoMb.limpar}" icon="fa fa-fw fa-eraser" />
                     </h:form>
-                    <p:dataTable id="tabelaDeEmprestimo" var="emprestado" value="#{emprestimoMb.listaDeEmprestimo.repositorio}"
+                    <p:dataTable id="tabelaDeEmprestimo" var="emprestado" 
+                                 value="#{emprestimoMb.listaDeEmprestimo.repositorio}"
                                  emptyMessage="Não existem empréstimos cadastrados" style="padding-top:20px;">
-                        <p:column headerText="Id" width="20">
+                        <p:column headerText="Id" width="20" style="text-align: right">
                             <h:outputText value="#{emprestado.id}" />
                         </p:column>
-                        <p:column headerText="Emprestado para">
+                        <p:column headerText="Amigo">
                             <h:outputText value="#{emprestado.amigo.nome}" />
                         </p:column>
                         <p:column headerText="Título do Livro">
                             <h:outputText value="#{emprestado.livro.titulo}"/>
                         </p:column>	
-                        <p:column headerText="Data do emprétimo">
-                            <h:outputText value="#{emprestado.dataEmprestimo}" />
+                        <p:column headerText="Data de emprétimo" style="text-align: center" width="100">
+                            <h:outputText value="#{emprestado.dataEmprestimoString}" />
                         </p:column>	
-                        <p:column headerText="Data de Devolução">
-                            <h:outputText value="#{emprestado.dataDevolucao}" />
+                        <p:column headerText="Data de Devolução" style="text-align: center" width="100">
+                            <h:outputText value="#{emprestado.dataDevolucaoString}" />
                         </p:column>	
-                        <p:column headerText="Status" width="30">
-                            <h:outputText value="#{emprestado.emprestimoAtivo}" />
+                        <p:column headerText="Emprestado" style="text-align: center" width="100">
+                            <h:outputText value="#{emprestado.emprestimoAtivoString}" />
                         </p:column>			    
-                        <p:column headerText="Ações" style="text-align: center">
-                            <h:form>
-                                <p:commandButton icon="fa fa-fw fa-edit" title="Editar Empréstimo" update="emprestimoForm">					    		
-                                    <f:setPropertyActionListener value="#{emprestado}" target="#{emprestimoMb.emprestimo}" />					    		
-                                </p:commandButton>	
-                                <p:commandButton icon="fa fa-fw fa-trash" title="Devolver Empréstimo" 
-                                                 update="tabelaDeEmprestimo emprestimoForm" action="#{emprestimoMb.devolver(emprestado)}">
-                                    <p:confirm header="Confirmação" message="Deseja deletar o Empréstimo?" icon="ui-icon-alert" />
+                        <p:column headerText="Ações" style="text-align: center" width="100">
+                            <h:form id="actionFormEmprestimo">
+                                 <p:commandButton icon="fa fa-fw fa-edit" title="Editar Empréstimo" 
+                                                  update="emprestimoForm" 
+                                                  action="#{emprestimoMb.setEmprestimo(emprestado)}" />
+                                <p:commandButton icon="fa fa-fw fa-book" title="Devolver Livro"
+                                                 update="tabelaDeEmprestimos emprestimoForm"
+                                                 rendered="#{emprestado.emprestimoAtivoString eq 'Ativo'}"
+                                                 action="#{emprestimoMb.devolver(emprestado)}">
+                                    <p:confirm header="Confirmação"
+                                               message="Deseja devolver o Livro?" icon="ui-icon-alert" />
                                 </p:commandButton>
 
                                 <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
-                                    <p:commandButton value="Sim" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
-                                    <p:commandButton value="Não" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+                                    <p:commandButton value="Sim" type="button" styleClass="ui-confirmdialog-yes" 
+                                                     icon="ui-icon-check" />
+                                    <p:commandButton value="Não" type="button" styleClass="ui-confirmdialog-no" 
+                                                     icon="ui-icon-close" />
                                 </p:confirmDialog>
                             </h:form>    
                         </p:column>

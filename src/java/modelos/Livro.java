@@ -2,6 +2,7 @@ package modelos;
 
 import java.util.Date;
 import java.util.Objects;
+import util.DateUtil;
 
 /**
  *
@@ -60,6 +61,11 @@ public class Livro {
     public boolean isEmprestado() {
         return emprestado;
     }
+    
+    public String getEmprestadoString(){
+        if(emprestado)return "Emprestado";
+        else return "Em casa";
+    }
 
     public void setEmprestado(boolean emprestado) {
         this.emprestado = emprestado;
@@ -67,6 +73,10 @@ public class Livro {
 
     public Date getAquisicao() {
         return aquisicao;
+    }
+    
+    public String getAquisicaoString(){
+        return DateUtil.dateToString(getAquisicao());
     }
 
     public void setAquisicao(Date dataDeAquisição) {

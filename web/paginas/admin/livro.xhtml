@@ -31,20 +31,20 @@
                                 <p:message for="autor" />
 
                                 <p:outputLabel for="aquisicao" value="Data de Aquisição:" />
-                                <p:calendar locale="de" id="aquisicao" navigator="true" value="#{livroMb.livro.aquisicao}" 
+                                <p:calendar locale="de" id="aquisicao" navigator="true" 
+                                            value="#{livroMb.livro.aquisicao}" 
                                              requiredMessage="Campo obrigatório"/>
                                 <p:message for="aquisicao"/>
 
                                 <p:outputLabel for="sinopse" value="Sinopse:"/>
                                 <p:inputTextarea id="sinopse" rows="6" cols="22" 
-                                                 requiredMessage="Campo obrigatório" 
-                                                 required="true" value="#{livroMb.livro.sinopse}" />
+                                                 required="false" value="#{livroMb.livro.sinopse}" />
                                 <p:message for="sinopse" />
 
                                 <p:outputLabel for="emprestado" value="Está emprestado? "/>                                
                                 <p:selectBooleanCheckbox id="emprestado" value="#{livroMb.livro.emprestado}"/>
-                                <p:outputLabel for="emprestado" value="Obs: Só marcar se não estiver em casa!!!" 
-                                               style="color: gray"/>
+                                <p:outputLabel for="emprestado" value="Obs: Marcar somente se estiver emprestado!!!" 
+                                               style="color: chocolate"/>
                             </p:panelGrid>
 
                             <p:commandButton value="Salvar" process="@form" update="@form tabelaDeLivros"
@@ -55,31 +55,37 @@
                         <p:dataTable id="tabelaDeLivros" var="livro" 
                                      value="#{livroMb.repositorio.repositorio}"
                                      emptyMessage="Não existem livros cadastrados" style="padding-top:20px;">
-                            <p:column headerText="Id">
+                            <p:column headerText="Id" width="20" style="text-align: right">
                                 <h:outputText value="#{livro.id}" />
                             </p:column>
-                            <p:column headerText="Título">
+                            <p:column headerText="Título" style="text-align: center">
                                 <h:outputText value="#{livro.titulo}" />
                             </p:column>
-                            <p:column headerText="Autor">
+                            <p:column headerText="Autor" style="text-align: center">
                                 <h:outputText value="#{livro.autor}" />
                             </p:column>
-                            <p:column headerText="Aquisição">
-                                <h:outputText value="#{livro.aquisicao}" />
+                            <p:column headerText="Aquisição" style="text-align: center" width="100">
+                                <h:outputText value="#{livro.aquisicaoString}" />
                             </p:column>
-                            <p:column headerText="Está emprestado?">
-                                <h:outputText value="#{livro.emprestado}" />
+                            <p:column headerText="Emprestado" width="100" style="text-align: center">
+                                <h:outputText value="#{livro.emprestadoString}" />
                             </p:column>
-                            <p:column headerText="Ações" style="text-align: center">
+                            <p:column headerText="Ações" style="text-align: center" width="100" >
                                 <h:form>
-                                    <p:commandButton icon="fa fa-fw fa-edit" title="Editar Livro" update="livroForm" action="#{livroMb.setLivro(livro)}" />
-                                    <p:commandButton icon="fa fa-fw fa-trash" title="Deletar Livro" update="tabelaDeLivros livroForm" action="#{livroMb.deletar(livro)}">
-                                        <p:confirm header="Confirmação" message="Deseja deletar o Livro?" icon="ui-icon-alert" />
+                                    <p:commandButton icon="fa fa-fw fa-edit" title="Editar Livro" 
+                                                     update="livroForm" action="#{livroMb.setLivro(livro)}" />
+                                    <p:commandButton icon="fa fa-fw fa-trash" title="Deletar Livro" 
+                                                     update="tabelaDeLivros livroForm" 
+                                                     action="#{livroMb.deletar(livro)}">
+                                        <p:confirm header="Confirmação" message="Deseja deletar o Livro?" 
+                                                   icon="ui-icon-alert" />
                                     </p:commandButton>
 
                                     <p:confirmDialog global="true" showEffect="fade" hideEffect="fade">
-                                        <p:commandButton value="Sim" type="button" styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
-                                        <p:commandButton value="Não" type="button" styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
+                                        <p:commandButton value="Sim" type="button" 
+                                                         styleClass="ui-confirmdialog-yes" icon="ui-icon-check" />
+                                        <p:commandButton value="Não" type="button" 
+                                                         styleClass="ui-confirmdialog-no" icon="ui-icon-close" />
                                     </p:confirmDialog>
                                 </h:form>
                             </p:column>
