@@ -90,9 +90,7 @@ public class LoginMb implements Serializable {
 
     public String realizaLogout() {
         pessoaLogada = null;
-        FacesContext contexto = FacesContext.getCurrentInstance();
-        contexto.getExternalContext().invalidateSession();
-        
-        return ("index.xhtml?faces-redirect=true");
+       FacesContext.getCurrentInstance().getExternalContext().invalidateSession();
+        return ("/index?faces-redirect=true");
     }
 }
