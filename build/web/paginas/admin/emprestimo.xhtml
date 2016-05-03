@@ -31,7 +31,7 @@
                             <p:message for="amigoSelect" />
 
                             <p:outputLabel for="dataEmprestimo" value="Data de Empréstimo:" />
-                            <p:calendar locale="de" id="dataEmprestimo" navigator="true" 
+                            <p:calendar yearRange="1980:2040" id="dataEmprestimo" navigator="true" 
                                         value="#{emprestimoMb.emprestimo.dataEmprestimo}" 
                                         requiredMessage="Campo obrigatório"/>
                             <p:message for="dataEmprestimo"/>
@@ -78,7 +78,7 @@
                                                   action="#{emprestimoMb.setEmprestimo(emprestado)}" />
                                 <p:commandButton icon="fa fa-fw fa-book" title="Devolver Livro"
                                                  update="tabelaDeEmprestimos emprestimoForm"
-                                                 rendered="#{emprestado.emprestimoAtivoString eq 'Ativo'}"
+                                                 rendered="#{emprestado.emprestimoAtivo}"
                                                  action="#{emprestimoMb.devolver(emprestado)}">
                                     <p:confirm header="Confirmação"
                                                message="Deseja devolver o Livro?" icon="ui-icon-alert" />
